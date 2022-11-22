@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<h:head><title>Página de Listagem</title></h:head>
+	
+	<h:body>
+		<h:form>
+			<p:panel header="Listagem de planetas">
+				<p:messages id="messages" showDetail="true" closable="true">
+	            	<p:autoUpdate/>
+	        	</p:messages>
+	        	
+	        	<p:growl id="message" showDetail="true"/>
+	        	<p:link outcome="index" value="voltar"/>
+	        	
+		        <p:dataTable value="#{planetaBean.planetas}" var="p" id="lista">
+		       		<p:column headerText="Id:"><p:outputLabel value="#{p.id}"></p:outputLabel></p:column>
+		       		<p:column headerText="Nome:"><p:outputLabel value="#{p.nome}"/></p:column>
+		       		<p:column headerText="Data de Registro:"><p:outputLabel value="#{p.dataRegistro}"><f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Fortaleza" /></p:outputLabel></p:column>
+		       		
+		       		<p:column><p:commandButton value="Excluir" actionListener="#{planetaBean.deletar(p)}" update="lista"/></p:column>
+		       		<p:column><p:commandButton value="Detalhes" actionListener="#{planetaBean.mostrarDetalhes(p)}"/></p:column>
+		       		
+		       	</p:dataTable>
+		    	<p:commandButton value="Maior Id" actionListener="#{planetaBean.maiorId()}"/>
+	        	
+			</p:panel>
+			</h:form>
+	</h:body>
+
+</html>
